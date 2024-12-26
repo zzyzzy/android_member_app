@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLength="16"
-            android:minLength="8"
             android:hint="아이디 입력" />
 
         <!-- 비밀번호 입력 -->
@@ -48,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="16"
-            android:minLength="8"
             android:inputType="textPassword"
             android:hint="비밀번호 입력" />
 
