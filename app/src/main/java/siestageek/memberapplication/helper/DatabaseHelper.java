@@ -23,12 +23,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String SQL = "create table member (" +
-            "mno int primary key autoincrement," +
-            "userid varchar(18) unique," +
-            "passwd varchar(18) not null," +
-            "name varchar(18) not null," +
-            "email text not null," +
-            "regdate datetime default current_timestamp)";
+                "mno integer primary key autoincrement," +
+                "userid varchar(18) unique," +
+                "passwd varchar(18) not null," +
+                "name varchar(18) not null," +
+                "email text not null," +
+                "regdate datetime default current_timestamp)";
         db.execSQL(SQL);
     }
 
@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // 회원 가입 처리
     public boolean insertMember(
-        String userid, String passwd, String name, String email) {
+            String userid, String passwd, String name, String email) {
         // 테이블에 레코드를 저장하기 위해 sqlite 초기화
         SQLiteDatabase db = this.getWritableDatabase();
 
