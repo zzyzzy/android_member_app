@@ -13,6 +13,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public static final String DATABASE_NAME = "androidtest.db";
     // 데이터베이스 초기화 변수
     // Device Explorer >> data >> data >> 앱패키지 >> databases
     private static final String DBNAME = "android.db";
@@ -95,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<String> userList = new ArrayList<>();
 
         // 쿼리 실행
+        // rawQuery (질의문, 매개변수)
         Cursor cur = db.rawQuery(sql, null);
 
         // 결과집합(커서) 처리
@@ -121,4 +123,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return userList;
     }
+
+    // 로그인 확인
+    public boolean loginUser(String userid, String passwd) {
+        String sql = "select name from member where userid=? and passwd=?";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 로그인 확인 질의문 작성
+        String[] params = new String[]{ userid, passwd };
+        Cursor cur = db.rawQuery(sql, params);
+
+        boolean isLoggedIn = cur.getCount() > 0;
+
+        cur.close();
+        db.close();
+
+        return isLoggedIn;
+    }
+
 }
