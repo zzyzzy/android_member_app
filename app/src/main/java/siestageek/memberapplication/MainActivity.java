@@ -112,21 +112,10 @@ public class MainActivity extends AppCompatActivity {
             return;  // 여기서 중지
         }
 
-        // 중복 아이디 체크
-        // if (databaseHelper.useridCheck(userid)) {
-        if (mariaDBHelper.useridCheck(userid)) {
-            Toast.makeText(this, "이미 사용중인 아이디입니다!", Toast.LENGTH_SHORT).show();
-            return;  // 여기서 중지
-        }
+        // 기존코드는 삭제함 - RegisterUserTask에서 재작성했기 때문
+        // 기존코드는 비동기처리를 위해 다음과 같이 호출
+        new RegisterUserTask().execute(userid, passwd, name, email);
 
-        // 회원 저장
-        // boolean success = databaseHelper.insertMember(userid, passwd, name, email);
-        boolean success = mariaDBHelper.insertMember(userid, passwd, name, email);
-        if (success) {
-            Toast.makeText(this, "✨회원 가입 성공!✨", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "😱회원 가입 실패!!😱 다시 시도하세요!!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     // AsyncTask 처리를 위한 비동기 처리 클래스
