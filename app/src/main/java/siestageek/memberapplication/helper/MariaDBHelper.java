@@ -7,12 +7,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import static siestageek.memberapplication.BuildConfig.DB_URL;
+import static siestageek.memberapplication.BuildConfig.DB_USR;
+import static siestageek.memberapplication.BuildConfig.DB_PWD;
+
 public class MariaDBHelper {
 
-    private static final String DB_URL = "";
-    private static final String DB_USER = "";
-    private static final String DB_PWD = "";
-    private static final String DB_NAME = "clouds2024";
+//    create table member (
+//    mno int primary key auto_increment,
+//    userid varchar(18) unique,
+//    passwd varchar(18) not null,
+//    name varchar(18) not null,
+//    email text not null,
+//    regdate datetime default current_timestamp());
+
+// 보안상의 이유로 데이터베이스 연결정보는 gradle의 buildconfig에 작성
+// 먼저, gradle.properties에 데이터베이스 연결정보 작성
+// 그런 다음, build.gradle에서 이것을 사용하다고 설정
+//    private static final String DB_URL = "jdbc:mariadb://:3306/";
+//    private static final String DB_USER = "";
+//    private static final String DB_PWD = "";
 
     // MariaDB Driver 초기화
     static {
@@ -44,7 +58,7 @@ public class MariaDBHelper {
 
     // 아이디 중복 확인
     public boolean useridCheck(String userid) {
-        String sql = "select from member where userid = ?";
+        String sql = "select mno from member where userid = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -70,7 +84,7 @@ public class MariaDBHelper {
 
     // 데이터베이스 연결객체 가져오기
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+        return DriverManager.getConnection(DB_URL, DB_USR, DB_PWD);
     }
 
 }
